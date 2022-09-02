@@ -31,6 +31,5 @@ var averageOfLevels = function(root) {
         }
     }
     getValuesOfLevels(root, 0);
-    console.log(averagesMapOfLevels)
     return Array.from({length: maxLevel + 1}, (_, index) => getAverage(averagesMapOfLevels[index]) )
 };
