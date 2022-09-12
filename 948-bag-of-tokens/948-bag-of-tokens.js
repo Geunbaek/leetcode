@@ -84,9 +84,8 @@ var bagOfTokensScore = function(tokens, power) {
         score: 0,
         power,
     }
-    q.print()
+ 
     while(!q.isEmpty()){
-        console.log(q.head.data)
         if(ret.power >= q.head.data){
             ret.power -= q.popleft();
             ret.score += 1;
