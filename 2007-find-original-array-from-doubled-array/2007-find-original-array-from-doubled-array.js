@@ -23,18 +23,21 @@ var findOriginalArray = function(changed) {
     
     for(let i = 0; i <= changed.length; i ++){
         const num = changed[i];
-        if(num === 0) {
-            if(counter[num] > 1){
-                counter[num] -= 2;
-                answer.push(num)
-                totalCount -= 2;
-            }
-        } else if(counter[num] > 0 && counter[num * 2] && counter[num * 2] > 0){
+        if (counter[num] > 0){
             counter[num] -= 1;
+            totalCount -= 1;
+        } else {
+            continue
+        }
+        
+        if (counter[num * 2] && counter[num * 2] > 0){
             counter[num * 2] -= 1;
             answer.push(num);
-            totalCount -= 2;
-        } 
+            totalCount -= 1;
+        } else {
+            counter[num] += 1;
+            totalCount += 1;
+        }
     }
     
     return totalCount === 0 ? answer : [];
