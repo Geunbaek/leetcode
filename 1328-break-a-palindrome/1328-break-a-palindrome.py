@@ -10,7 +10,6 @@ class Solution:
                 if len(palindrome) % 2 != 0 and i == len(palindrome) // 2:
                     continue
                 if palindrome[i] > char:
-                    print(i, char)
                     palindrome[i] = char
                     return "".join(palindrome)
         
