@@ -15,7 +15,6 @@ impl Solution {
         
         while &left <= &right {
             let mid = left + (right - left) / 2;
-            println!("{} {}, {}", left, right, mid);
             let value = guess(mid);
     
             if value == -1 {
