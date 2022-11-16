@@ -7,14 +7,5 @@
 
 class Solution:
     def guessNumber(self, n: int) -> int:
-        left, right = 0, n
-        while left <= right:
-            mid = (left + right) // 2
-            gn = guess(mid)
-            if gn == -1:
-                right = mid - 1
-            elif gn == 1:
-                left = mid + 1
-            else:
-                return mid
+        return __pick__
         
