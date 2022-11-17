@@ -2,13 +2,13 @@ fn getRange(ax1:i32, ax2:i32, bx1:i32, bx2:i32) -> i32{
     if ax1 <= bx1 && bx1 <= bx2 && bx2 <= ax2 { 
         return bx2 - bx1;
     } 
-    if ax1 <= bx1 && bx1 <= ax2 && ax2 <= bx2 {
+    else if ax1 <= bx1 && bx1 <= ax2 && ax2 <= bx2 {
         return ax2 - bx1;
     } 
-    if bx1 <= ax1 && ax1 <= bx2 && bx2 <= ax2 {
+    else if bx1 <= ax1 && ax1 <= bx2 && bx2 <= ax2 {
         return bx2 - ax1;
     }
-    if bx1 <= ax1 && ax1 <= ax2 && ax2 <= bx2 {
+    else if bx1 <= ax1 && ax1 <= ax2 && ax2 <= bx2 {
         return ax2 - ax1;
     }
     0
