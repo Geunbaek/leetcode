@@ -1,9 +1,19 @@
 import re
+
+def operate(value, result, oper):
+    if not oper:
+        value = result
+    else:
+        if oper == "+":
+            value += result
+        else:
+            value -= result
+    return value
+
 class Solution:
     def calculate(self, s: str) -> int:
         def dfs(depth):
             value = 0
-            num = ""
             oper = ""
             while True:
                 if depth >= len(s):
@@ -16,13 +26,7 @@ class Solution:
                 
                 if char == "(":
                     result, lastDepth = dfs(depth + 1)
-                    if not oper:
-                        value = result
-                    else:
-                        if oper == "+":
-                            value += result
-                        else:
-                            value -= result
+                    value = operate(value, result, oper)
                     depth = lastDepth
                     continue
                 
@@ -30,13 +34,7 @@ class Solution:
                     return value, depth + 1
         
                 if char.isdigit():
-                    if not oper:
-                        value = int(char)
-                    else:
-                        if oper == "+":
-                            value += int(char)
-                        else:
-                            value -= int(char)
+                    value = operate(value, int(char), oper)
                 else:
                     oper = char
                     
