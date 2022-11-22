@@ -1,12 +1,10 @@
-import math
 class Solution:
-    def numSquares(self, n: int) -> int:
-        dp = [float("inf") for _ in range(n + 1)]
-        dp[0] = 0
-        
-        for num in range(1, int(math.sqrt(n)) + 1):
-            for i in range(num ** 2, n + 1):
-                dp[i] = min(dp[i] , dp[i - (num ** 2)] + 1)
-
-        return dp[n]         
-        
+    def numSquares(self, n):
+        if int(sqrt(n))**2 == n: return 1
+        for j in range(int(sqrt(n)) + 1):
+            if int(sqrt(n - j*j))**2 == n - j*j: return 2
+            
+        while n % 4 == 0: 
+            n >>= 2
+        if n % 8 == 7: return 4
+        return 3
