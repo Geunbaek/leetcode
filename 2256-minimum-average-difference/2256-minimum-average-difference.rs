@@ -8,11 +8,11 @@ impl Solution {
         let mut min: i64 = i64::MAX;;
         let mut answer = 0;
  
-        for (i, num) in nums.iter().enumerate() {
+        for (i, num) in new_nums.iter().enumerate() {
             let m = i as i64 + 1;
             
-            left += *num as i64;
-            right -= *num as i64;
+            left += num;
+            right -= num;
 
             let avg_diff: i64 = 
                 if m != n {
@@ -22,8 +22,8 @@ impl Solution {
                 };
             
             
-            if min > avg_diff as i64 {
-                min = avg_diff as i64;
+            if min > avg_diff {
+                min = avg_diff;
                 answer = i as i32;
            }
         }
