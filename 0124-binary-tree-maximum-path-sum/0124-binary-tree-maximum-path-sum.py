@@ -21,5 +21,4 @@ class Solution:
             
         sum_set = set()
         dfs(root)
-        print(sum_set)
         return max(sum_set)
