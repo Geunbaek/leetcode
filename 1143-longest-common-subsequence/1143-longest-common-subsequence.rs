@@ -2,8 +2,8 @@ use std::cmp;
 
 impl Solution {
     pub fn longest_common_subsequence(text1: String, text2: String) -> i32 {
-        let text1 = String::from(" ") + &text1;
-        let text2 = String::from(" ") + &text2;
+        let text1:Vec<_> = (String::from(" ") + &text1).chars().collect();
+        let text2:Vec<_> = (String::from(" ") + &text2).chars().collect();
         
         let c:usize = text1.len();
         let r:usize = text2.len();
@@ -16,7 +16,7 @@ impl Solution {
                     continue;
                 }
                 
-                if text1.chars().nth(x).unwrap() == text2.chars().nth(y).unwrap() {
+                if text1[x] == text2[y] {
                     dp[y][x] = dp[y - 1][x - 1] + 1;
                 } else {
                     dp[y][x] = cmp::max(dp[y - 1][x], dp[y][x - 1]);
