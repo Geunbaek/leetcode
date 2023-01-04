@@ -3,11 +3,13 @@ from collections import Counter
 class Solution:
     def minimumRounds(self, tasks: List[int]) -> int:
         counter = Counter(tasks)
-        dp = [0 for _ in range(100001)]
-        dp[2] = 1
-        dp[3] = 1
+        dp = [0 for _ in range(len(tasks) + 1)]
+        if len(tasks) >= 2:
+            dp[2] = 1
+        if len(tasks) >= 3:
+            dp[3] = 1
         
-        for i in range(4, 100001):
+        for i in range(4, len(tasks) + 1):
             temp = []
             if dp[i - 2]:
                 temp.append(dp[i - 2] + 1)
