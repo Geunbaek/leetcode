@@ -18,8 +18,7 @@ class Solution:
             if k >= 0:
                 for w, e in edges[now]:
                     if visit[e] <= n:
-                        alt = weight + w
-                        heapq.heappush(h, (alt, e, k-1))
+                        heapq.heappush(h, (weight + w, e, k-1))
             visit[now] += 1
 
         return -1
