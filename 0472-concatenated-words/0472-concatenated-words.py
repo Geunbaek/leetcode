@@ -6,7 +6,7 @@ class Solution:
             
             subword = ""
             for i, char in enumerate(word):
-                subword += char # append char to the end of the subword
+                subword += char 
                 if subword in words_set:
                     if is_concatenated(word[i + 1:], count + 1):
                         return True
