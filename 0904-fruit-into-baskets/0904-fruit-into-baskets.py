@@ -11,7 +11,7 @@ class Solution:
             temp.append(fruit)
             count += 1
             
-            while temp and counter and len(counter) > 2:
+            while counter and len(counter) > 2:
                 first = temp.popleft()
                 counter[first] -= 1
                 count -= 1
