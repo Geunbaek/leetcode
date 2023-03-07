@@ -1,6 +1,6 @@
 class Solution:
     def minimumTime(self, time: List[int], totalTrips: int) -> int:
-        left, right = 0, 1_000_000_000_000_000
+        left, right = 0, max(time) * totalTrips
         
         while left <= right:
             mid = (left + right) // 2
