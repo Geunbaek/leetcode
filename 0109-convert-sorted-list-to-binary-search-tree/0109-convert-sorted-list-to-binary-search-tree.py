@@ -25,14 +25,7 @@ class Solution:
                 return None
          
             mid = (left + right) // 2
-            left_child = make_BST(left, mid - 1)
-            
-            parent = TreeNode(nodes[mid].val)
-        
-            right_child = make_BST(mid + 1, right)
-            
-            parent.left = left_child
-            parent.right = right_child
+            parent = TreeNode(nodes[mid].val, make_BST(left, mid - 1), make_BST(mid + 1, right))
             
             return parent
         
