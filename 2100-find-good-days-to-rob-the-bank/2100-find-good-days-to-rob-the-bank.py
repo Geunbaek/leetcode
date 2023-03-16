@@ -17,7 +17,7 @@ class Solution:
                 decre.appendleft(decre[0] + 1)
             else:
                 decre.appendleft(0)
-        print(incre, decre)
+       
         answer = []
         for i in range(time, n - time):
             if decre[i - time] - decre[i] >= time and incre[i + time] - incre[i] >= time:
