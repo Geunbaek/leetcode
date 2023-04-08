@@ -8,7 +8,6 @@ class Node:
 from collections import deque
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-
         if not node:
             return 
         def bfs(start_node):
@@ -33,11 +32,3 @@ class Solution:
         
         return bfs(node)
             
-            
-            
-            
-            
-        return dfs(node)
-            
-            
-        
