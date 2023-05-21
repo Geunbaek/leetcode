@@ -24,29 +24,6 @@ class Solution:
                     
             return edges
         
-        def get_dist(x1, y1, island_id):
-            q = deque([(x1, y1, 0)])
-            visited2 = [[0 for _ in range(c)] for _ in range(r)]
-            visited2[y1][x1] = 1
-            
-            while q:
-                x, y, cnt = q.popleft()
- 
-                for i in range(4):
-                    nx = x + dx[i]
-                    ny = y + dy[i]
-                    if not (0 <= nx < c and 0 <= ny < r):
-                        continue
-                    if visited2[ny][nx] == 1:
-                        continue
-                    if visited[ny][nx] == island_id:
-                        continue
-                    if visited[ny][nx] != float("inf") and visited[ny][nx] != island_id:
-                        return cnt
-                    visited2[ny][nx] = 1
-                    q.append((nx, ny, cnt + 1))
-            return float('inf')
-        
         island_id = 1
         r, c = len(grid), len(grid[0])
         visited = [[float('inf') for _ in range(c)] for _ in range(r)]
@@ -66,7 +43,6 @@ class Solution:
         for x1, y1 in edge_cache[1]:
             for x2, y2 in edge_cache[2]:
                 answer = min(answer, abs(y2 - y1) + abs(x2 - x1) - 1)
-            # answer = min(answer, get_dist(x1, y1, 1))
     
         return answer
         
