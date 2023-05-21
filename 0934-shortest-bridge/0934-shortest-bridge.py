@@ -1,53 +1,54 @@
 from collections import deque
-
 class Solution:
     def shortestBridge(self, grid: List[List[int]]) -> int:
-        def get_edges(island_id, x, y):
-            edges = []
-            q = deque([(x, y)])
-            visited[y][x] = island_id
-            
+        n = len(grid)
+        m = len(grid[0])
+        seen = set()
+        
+        def bfs(x,y,label):
+            q = deque([(x,y)])
+            seen.add((x,y))
+            grid[x][y] = label
             while q:
-                now_x, now_y = q.popleft()
-                for i in range(4):
-                    nx = now_x + dx[i]
-                    ny = now_y + dy[i]
-                    if not (0 <= nx < c and 0 <= ny < r):
+                x,y = q.popleft()
+                for nx,ny in [(x + 1,y),(x - 1,y),(x,y - 1),(x,y + 1)]:
+                    if not (0 <= nx < n and 0 <= ny < m ) :continue 
+                    if (nx,ny) in seen:continue 
+                    if grid[nx][ny] == 0 :continue
+                    seen.add((nx,ny))
+                    q.append((nx,ny))
+                    grid[nx][ny] = label
+        label = 2
+        for i in range(n):
+            for j in  range(m):
+                if (i,j) in seen or grid[i][j] == 0:continue
+                bfs(i,j,label)
+                label += 1
+        # 한쪽에서 bfs 를 돌려 
+        def bfs_1():
+            q = deque([])
+            vis = set()
+            for i in range(n):
+                for j in range(m):
+                    # 2를기준으로 넣기 
+                    if grid[i][j] == 2:
+                        q.append((i,j,0))
+                        vis.add((i,j))
+            res = int(1e10)
+            while q:
+                x,y,dist = q.popleft()
+                for nx,ny in [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]:
+                    if not (0 <= nx < n and 0 <= ny < m):continue 
+                    if (nx,ny) in vis:continue 
+                    # 3이면 연결된거니 답 갱신 
+                    if grid[nx][ny] == 3:
+                        res = min(res,dist)
+                    # 2라면 필요없고 
+                    elif grid[nx][ny] == 2:
                         continue
-                    if visited[ny][nx] == island_id:
-                        continue
-                    if grid[ny][nx] == 0:
-                        edges.append((now_x, now_y))
-                        continue
-                    visited[ny][nx] = island_id
-                    q.append((nx, ny))
-                    
-            return edges
-        
-        island_id = 1
-        r, c = len(grid), len(grid[0])
-        visited = [[float('inf') for _ in range(c)] for _ in range(r)]
-        answer = float('inf')
-        dx = [-1, 0, 1, 0]
-        dy = [0, -1, 0, 1]
-        edge_cache = {}     
-    
-        
-        for y in range(r):
-            for x in range(c):
-                if grid[y][x] == 0 or visited[y][x] <= island_id:
-                    continue
-                edge_cache[island_id] = get_edges(island_id, x, y)
-                island_id += 1
-            
-        for x1, y1 in edge_cache[1]:
-            for x2, y2 in edge_cache[2]:
-                answer = min(answer, abs(y2 - y1) + abs(x2 - x1) - 1)
-    
-        return answer
-        
-                
-                    
-                
-            
-        
+                    # 0이라면 
+                    else:
+                        q.append((nx,ny,dist + 1))
+                        vis.add((nx,ny))
+            return res
+        return bfs_1()
