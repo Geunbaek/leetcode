@@ -26,7 +26,6 @@ class Solution:
                 last_num = right_value - right + 1
                 m = right_value + last_num
                 right_sum = m * right // 2
-            print(left_sum, right_sum)
             return left_sum + right_sum + value
         
         
@@ -34,8 +33,7 @@ class Solution:
         
         while l <= r:
             mid = (l + r) // 2
-            print(mid, "mid")
-            print(_sum(mid))
+
             if _sum(mid) <= maxSum:
                 l = mid + 1
             else:
