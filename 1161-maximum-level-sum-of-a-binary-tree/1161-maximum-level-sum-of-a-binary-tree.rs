@@ -19,7 +19,6 @@
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::cmp;
 
 impl Solution {
     pub fn dfs(tree_info: &mut Vec<i32>, node: Option<Rc<RefCell<TreeNode>>>, depth: usize, visited: &mut Vec<bool>) {
