@@ -52,7 +52,6 @@ impl Solution {
             }
             
             if Solution::find(&mut parent, 0) == Solution::find(&mut parent, r * c + 1) {
-                println!("{:?}", parent);
                 return day as i32;
             }
         }
