@@ -33,11 +33,8 @@ impl Solution {
             while f_right < n + 1 && f_prefix[f_right] - f_prefix[left] <= k {
                 f_right += 1;
             }
-
             answer = cmp::max(answer, f_right - left - 1);
         }
-    
-
         return answer as i32;
     }
 }
