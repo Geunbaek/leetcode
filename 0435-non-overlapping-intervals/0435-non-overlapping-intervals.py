@@ -1,14 +1,15 @@
+import heapq
+
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-        intervals.sort(key = lambda x: x[1])
-        ans = 0
-        k = -inf
+        intervals.sort(key = lambda x: (x[-1]))
+        time = -float(inf)
+        answer = 0
         
-        for x, y in intervals:
-            if x >= k:
-                k = y
+        for u, v in intervals:
+            if u >= time:
+                time = v
             else:
-                ans += 1
-        
-        return ans
-        
+                answer += 1
+                
+        return answer
