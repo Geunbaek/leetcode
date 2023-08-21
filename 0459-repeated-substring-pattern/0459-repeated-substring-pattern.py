@@ -1,18 +1,11 @@
 class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
-        def check(start, interval, prev):
-            if start >= len(s):
-                return True
-            if prev == s[start:start+interval]:
-                return check(start + interval, interval, prev)
-            else:
-                return False
         
-        for i in range(1, len(s)):
-            if len(s) % i != 0:
-                continue
-            if check(0, i, s[0:i]):
-                return True
-            
+        size = len(s)
+        
+        for idx in range(1, size // 2 + 1):
+            if size % idx == 0:
+                restruct_str = s[:idx] * ( size // idx)
+                if restruct_str == s:
+                    return True
         return False
-            
