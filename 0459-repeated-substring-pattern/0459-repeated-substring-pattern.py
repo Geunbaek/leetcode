@@ -12,7 +12,6 @@ class Solution:
             if len(s) % i != 0:
                 continue
             if check(0, i, s[0:i]):
-                print(i)
                 return True
             
         return False
