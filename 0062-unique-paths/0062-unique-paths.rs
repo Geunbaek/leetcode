@@ -10,7 +10,7 @@ impl Solution {
                 dp[y][x] = std::cmp::max(dp[y][x], dp[y - 1][x] + dp[y][x - 1]);
             }
         }
-        print!("{:?}", dp);
+      
         return dp[n][m];
     }
 }
