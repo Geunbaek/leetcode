@@ -6,11 +6,32 @@ class Node:
         self.next = next
         self.random = random
 """
-import copy
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        return copy.deepcopy(head)
+        if head is None:
+            return head
+        
+        temp = head
+        
+        cache = dict()
+        
+        while temp:
+            cache[temp] = Node(temp.val)
+            temp = temp.next
+        
+        temp = head
+        while temp.next:
+            cache[temp].next = cache[temp.next]
+            temp = temp.next
             
+        temp = head
+        while temp:
+            if temp.random is not None:
+                cache[temp].random = cache[temp.random]
+            temp = temp.next
+            
+            
+        return cache[head]
             
         
