@@ -26,10 +26,14 @@ class Solution:
             p[ap] = bp
             
         answer = 0
-
+        connect = 0
         for u, v, d in edges:
             if find(u) != find(v):
                 union(u, v)
                 answer += d
+                connect += 1
+                
+            if connect == n - 1:
+                break
                 
         return answer
