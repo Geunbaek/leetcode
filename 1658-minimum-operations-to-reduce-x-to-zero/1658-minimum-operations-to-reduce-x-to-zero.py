@@ -15,7 +15,7 @@ class Solution:
             
         right = 0
         answer = float('inf')
-        print(n)
+  
         for left in range(n + 1):
             while right + 1 < n and prefix[right] - prefix[left] < x:
                 right += 1
