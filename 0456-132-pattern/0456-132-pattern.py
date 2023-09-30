@@ -1,15 +1,17 @@
 class Solution(object):
     def find132pattern(self, nums):
-        stack=[]
-        n = float('-inf')
+        stack = []
         
-        for i in range(len(nums) - 1, -1, -1):
-            if nums[i] < n:
+        n = float("-inf")
+        
+        for num in nums[::-1]:
+            if num < n:
                 return True
             
-            while stack and stack[-1] < nums[i]:
+            while stack and stack[-1] < num:
                 n = stack.pop()
                 
-            stack.append(nums[i])
+            stack.append(num)
             
         return False
+        
