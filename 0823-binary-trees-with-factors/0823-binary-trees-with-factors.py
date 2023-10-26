@@ -7,7 +7,6 @@ class Solution:
                     return
                 
                 if num % n == 0 and num // n in cache:
-                    print(n, num)
                     mod = num // n
                     dp[num] += (dp[n] * dp[mod])
                     dp[num] %= MOD
