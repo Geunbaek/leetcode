@@ -10,8 +10,7 @@ class Solution:
                 if matrix[y][x] == 0:
                     continue
                 matrix[y][x] += matrix[y - 1][x]
-        for l in matrix:
-            print(l)
+  
         answer = 0
         for y in range(r):
             sorted_line = sorted(matrix[y], reverse=True)
@@ -25,5 +24,3 @@ class Solution:
             
         return answer
                 
-                
-        
