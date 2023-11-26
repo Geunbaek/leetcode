@@ -1,22 +1,26 @@
 class Solution:
     def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:
         res = [0 for _ in range(len(nums))]
-        h = []
-        for i, num in enumerate(nums):
-            heapq.heappush(h, (num, i))
+        index_nums = [(num, i) for i, num in enumerate(nums)]
+        index_nums.sort()
+        index_nums = deque(index_nums)
         
-        while h:
-            num, index = heapq.heappop(h)
-            index_h = [index]
-            num_h = [num]
-            while h and h[0][0] - num <= limit:
-                num, index = heapq.heappop(h)
-                heapq.heappush(index_h, index)
-                heapq.heappush(num_h, num)
+        
+        while index_nums:
+            num, i = index_nums.popleft()
+            indexs = [i]
+            nums = [num]
+            while index_nums and index_nums[0][0] - num <= limit:
+                num, i = index_nums.popleft()
+                indexs.append(i)
+                nums.append(num)
                 
-            while index_h:
-                index = heapq.heappop(index_h)
-                num = heapq.heappop(num_h)
-                res[index] = num
+            indexs.sort()
+            nums.sort()
+            
+            n = len(nums)
+            for i, num in zip(indexs, nums):
+                res[i] = num
+                
         
         return res
