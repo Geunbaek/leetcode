@@ -3,24 +3,27 @@ class Solution:
         res = [0 for _ in range(len(nums))]
         index_nums = [(num, i) for i, num in enumerate(nums)]
         index_nums.sort()
-        index_nums = deque(index_nums)
         
+        n = len(nums)
         
-        while index_nums:
-            num, i = index_nums.popleft()
-            indexs = [i]
-            nums = [num]
-            while index_nums and index_nums[0][0] - num <= limit:
-                num, i = index_nums.popleft()
-                indexs.append(i)
-                nums.append(num)
+        start = 0
+        
+        while start < n:
+            num = index_nums[start]
+            
+            indexs = [num[1]]
+            end = start + 1
+            
+            while end < n and index_nums[end][0] - num[0] <= limit:
+                num = index_nums[end]
+                indexs.append(index_nums[end][1])
+                end += 1
                 
             indexs.sort()
-            nums.sort()
             
-            n = len(nums)
-            for i, num in zip(indexs, nums):
-                res[i] = num
+            for i, j in zip(indexs, range(start, end)):
+                res[i] = index_nums[j][0]
                 
-        
+            start = end
         return res
+                
