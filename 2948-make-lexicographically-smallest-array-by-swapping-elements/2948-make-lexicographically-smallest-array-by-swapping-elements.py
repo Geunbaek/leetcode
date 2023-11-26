@@ -9,14 +9,16 @@ class Solution:
         start = 0
         
         while start < n:
-            num = index_nums[start]
+            
+            temp_start = start
+            num = index_nums[temp_start]
             
             indexs = [num[1]]
             end = start + 1
             
-            while end < n and index_nums[end][0] - num[0] <= limit:
-                num = index_nums[end]
+            while end < n and index_nums[end][0] - index_nums[temp_start][0] <= limit:
                 indexs.append(index_nums[end][1])
+                temp_start += 1
                 end += 1
                 
             indexs.sort()
