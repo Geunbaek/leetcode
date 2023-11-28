@@ -25,8 +25,6 @@ class Solution:
                     plants_area.append(0)
             else:
                 if now_seat_count == 2:
-                    if not plants_area:
-                        plants_area.append(0)
                     plants_area[-1] += 1
             
         
