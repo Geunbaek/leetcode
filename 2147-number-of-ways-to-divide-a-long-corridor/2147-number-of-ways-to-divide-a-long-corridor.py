@@ -31,7 +31,7 @@ class Solution:
             
         
         answer = 1
-        print(plants_area)
+     
         for area in plants_area[:-1]:
             answer *= (area + 1) 
             answer %= MOD
