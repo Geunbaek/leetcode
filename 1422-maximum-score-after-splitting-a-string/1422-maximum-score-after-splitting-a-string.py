@@ -6,10 +6,8 @@ class Solution:
         for i in range(1, n):
             left = s[:i]
             right = s[i:]
-            print(left, right)
-            
+     
             score = max(score, left.count("0") + right.count("1"))
-            
-            
+             
         return score
         
