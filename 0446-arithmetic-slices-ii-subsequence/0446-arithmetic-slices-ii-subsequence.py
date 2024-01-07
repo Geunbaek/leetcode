@@ -8,7 +8,7 @@ class Solution:
             for x in range(y):
                 diff = nums[y] - nums[x]
                 ans += dp[x][diff]
-                print(dp[x][diff])
+                # print(dp[x][diff])
                 dp[y][diff] += dp[x][diff] + 1
         # for l in dp:
         #     print(l)
