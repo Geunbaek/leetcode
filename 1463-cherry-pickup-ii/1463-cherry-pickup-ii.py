@@ -4,6 +4,9 @@ class Solution:
         memo = dict()
         
         def dp(row, col1, col2):
+            if row >= r:
+                return 0
+            
             if not (0 <= col1 < c and 0 <= col2 < c):
                 return 0
             
@@ -14,14 +17,15 @@ class Solution:
             if col1 != col2:
                 ret += grid[row][col2]
             
-            if row != r - 1:
-                _max = 0
-                
-                for next_col1 in [col1 - 1, col1, col1 + 1]:
-                    for next_col2 in [col2 - 1, col2, col2 + 1]:
-                        _max = max(_max, dp(row + 1, next_col1, next_col2))
-                        
-                ret += _max
+      
+            _max = 0
+
+            for next_col1 in [col1 - 1, col1, col1 + 1]:
+                for next_col2 in [col2 - 1, col2, col2 + 1]:
+                    _max = max(_max, dp(row + 1, next_col1, next_col2))
+
+            ret += _max
+            
             memo[(row, col1, col2)] = ret
             return memo[(row, col1, col2)]
         
