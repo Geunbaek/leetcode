@@ -16,9 +16,9 @@ impl Solution {
             return true;
         }
         
-        for word in words.iter() {
-            if is_palindrome(word) {
-                return word.to_string();
+        for word in words.into_iter() {
+            if is_palindrome(&word) {
+                return word;
             }
         }
         return String::from("");
