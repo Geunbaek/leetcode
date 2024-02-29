@@ -72,7 +72,6 @@ impl Solution {
         dfs(&mut trees, 0, root);
         
         for i in 0..1000001 {
-            println!("{:?}", trees[i]);
             if trees[i].len() == 0 {
                 break;
             }
