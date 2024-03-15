@@ -16,7 +16,7 @@ impl Solution {
             let mul = r[n - i - 1] * nums[i];
             r.push(mul);
         }
-        println!("{l:?} {r:?}");
+   
         for i in 1..=n {
             let left = l[i - 1] / l[0];
             let right = r[n - i] / r[0];
