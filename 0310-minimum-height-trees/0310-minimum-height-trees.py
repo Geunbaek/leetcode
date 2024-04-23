@@ -1,39 +1,28 @@
 class Solution:
-    def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
-
-        # edge cases
-        if n <= 2:
+    def findMinHeightTrees(self, n: int, edges: list[list[int]]) -> list[int]:
+        if not edges or len(edges) == 1:
             return [i for i in range(n)]
 
-        # Build the graph with the adjacency list
-        neighbors = [set() for i in range(n)]
-        for start, end in edges:
-            neighbors[start].add(end)
-            neighbors[end].add(start)
+        graph = [[] for _ in range(n)]
+        leaf = []
 
-        # Initialize the first layer of leaves
-        leaves = []
-        for i in range(n):
-            if len(neighbors[i]) == 1:
-                leaves.append(i)
+        for s, e in edges:
+            graph[s].append(e)
+            graph[e].append(s)
 
-        # Trim the leaves until reaching the centroids
-        remaining_nodes = n
-        while remaining_nodes > 2:
-            remaining_nodes -= len(leaves)
-            new_leaves = []
-            # remove the current leaves along with the edges
-            while leaves:
-                leaf = leaves.pop()
-                # the only neighbor left for the leaf node
-                neighbor = neighbors[leaf].pop()
-                # remove the only edge left
-                neighbors[neighbor].remove(leaf)
-                if len(neighbors[neighbor]) == 1:
-                    new_leaves.append(neighbor)
+        for i in range(len(graph)):
+            if len(graph[i]) == 1:
+                leaf.append(i)
 
-            # prepare for the next round
-            leaves = new_leaves
+        while n > 2:
+            n -= len(leaf)
+            new_leaf = []
+            for l in leaf:
+                neighbor = graph[l].pop()
+                graph[neighbor].remove(l)
 
-        # The remaining nodes are the centroids of the graph
-        return leaves
+                if len(graph[neighbor]) == 1:
+                    new_leaf.append(neighbor)
+            leaf = new_leaf
+
+        return leaf
