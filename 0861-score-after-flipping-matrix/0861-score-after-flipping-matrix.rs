@@ -29,9 +29,7 @@ impl Solution {
         
         let mut ans = 0;
         
-        for l in grid.iter() {
-            println!("{l:?}");
-        }
+   
         for y in 0..r {
             for x in 0..c {
                 let col = grid[y][x] << (c - x - 1);
