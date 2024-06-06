@@ -24,7 +24,6 @@ class Solution:
             if count + 1 == groupSize:
                 continue
             heapq.heappush(h, (card, count + 1))
-        print(h)
         for card, count in h:
             if count < groupSize:
                 return False
