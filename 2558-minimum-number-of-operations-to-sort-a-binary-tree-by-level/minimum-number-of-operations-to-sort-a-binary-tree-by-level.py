@@ -47,7 +47,6 @@ class Solution:
         for node in nodes:
             sorted_node = sorted(node)
             diff = compare_arr(node, sorted_node)
-            print(node, sorted_node, diff)
             answer += diff
 
         return answer
