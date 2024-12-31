@@ -3,6 +3,7 @@ class Solution:
         n = days[-1] + 1
 
         dp = [0 for _ in range(n)]
+        days = set(days)
         for day in range(n):
             if day not in days:
                 dp[day] = dp[day - 1]
