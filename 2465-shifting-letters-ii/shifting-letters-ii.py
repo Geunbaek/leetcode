@@ -24,8 +24,10 @@ class Solution:
         for i in range(1, n + 1):
             letter = letters[i - 1] + prefix_sum[i]
 
-            while letter < 0:
-                letter += 26
+            if letter < 0:
+                diff = -letter // 26
+                letter += 26 * (diff + 1)
+
 
             if letter >= 26:
                 letter %= 26
