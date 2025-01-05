@@ -23,7 +23,6 @@ class Solution:
 
         for i in range(1, n + 1):
             letter = letters[i - 1] + prefix_sum[i]
-            print(letter)
 
             while letter < 0:
                 letter += 26
