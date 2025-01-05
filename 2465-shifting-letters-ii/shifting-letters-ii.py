@@ -27,8 +27,8 @@ class Solution:
             while letter < 0:
                 letter += 26
 
-            while letter >= 26:
-                letter -= 26
+            if letter >= 26:
+                letter %= 26
 
             answer.append(chr(letter + ord('a')))
 
