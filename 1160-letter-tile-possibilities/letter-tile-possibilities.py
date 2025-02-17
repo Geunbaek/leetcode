@@ -24,6 +24,6 @@ class Solution:
             alpha[index] += 1
 
         recur(0, "")
-        print(sub)
+    
         return len(sub)
         
