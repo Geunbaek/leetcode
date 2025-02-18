@@ -4,8 +4,7 @@ class MRUQueue:
         self.q = [i for i in range(1, n + 1)]
 
     def fetch(self, k: int) -> int:
-        el = self.q[k - 1]
-        self.q.remove(el)
+        el = self.q.pop(k - 1)
         self.q.append(el)
         return el
 
