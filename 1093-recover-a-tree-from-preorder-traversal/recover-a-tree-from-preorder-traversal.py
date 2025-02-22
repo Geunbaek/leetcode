@@ -48,6 +48,7 @@ class Solution:
         
             root_value = get_root_value(left, right)
             root = TreeNode(int(root_value))
+            
             if left + len(root_value) >= right:
                 return root
 
