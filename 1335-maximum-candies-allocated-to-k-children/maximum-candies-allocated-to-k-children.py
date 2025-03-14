@@ -5,12 +5,11 @@ class Solution:
 
             for candy in candies:
                 d += candy // num
-            print(d)
             return d >= k
 
         if sum(candies) < k:
             return 0
-            
+
         left, right = 1, 10_000_000
 
         while left <= right:
