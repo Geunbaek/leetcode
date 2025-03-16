@@ -8,7 +8,7 @@ class Solution:
 
             return repair_cars >= cars
         
-        left, right = 0, 100_000_000_000_000
+        left, right = 0, max(ranks) * cars * cars
 
         while left <= right:
             mid = (left + right) // 2
