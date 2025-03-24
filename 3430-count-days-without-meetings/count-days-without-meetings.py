@@ -14,7 +14,6 @@ class Solution:
             else:
                 stack.append((last_start, last_end))
                 stack.append((start, end))
-        print(stack)
         for s, e in stack:
             days -= (e - s) + 1
         return days
