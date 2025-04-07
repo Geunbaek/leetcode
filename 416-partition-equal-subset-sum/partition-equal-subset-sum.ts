@@ -7,7 +7,6 @@ function canPartition(nums: number[]): boolean {
 
         if (memo.has(`${n}-${subSum}`)) return memo.get(`${n}-${subSum}`)
         const result = recur(n - 1, subSum - nums[n - 1]) || recur(n - 1, subSum);
-        // console.log(memo, result)
         memo.set(`${n}-${subSum}`, result);
         return result;
     }
