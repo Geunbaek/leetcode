@@ -1,16 +1,9 @@
 class Solution:
     def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
         def is_good_triplets(i, j, k):
-            if not (abs(arr[i] - arr[j]) <= a):
-                return False
-
-            if not (abs(arr[j] - arr[k]) <= b):
-                return False
-
-            if not (abs(arr[i] - arr[k]) <= c):
-                return False
-            
-            return True
+            if (abs(arr[i] - arr[j]) <= a) and (abs(arr[j] - arr[k]) <= b) and (abs(arr[i] - arr[k]) <= c):
+                return True
+            return False
         
         answer = 0
         for i in range(len(arr)):
