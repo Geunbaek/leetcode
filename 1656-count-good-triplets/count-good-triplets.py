@@ -17,8 +17,8 @@ class Solution:
         
         answer = 0
         for i in range(len(arr)):
-            for j in range(len(arr)):
-                for k in range(len(arr)):
+            for j in range(i + 1, len(arr)):
+                for k in range(j + 1, len(arr)):
                     if is_good_triplets(i, j, k):
                         answer += 1
 
