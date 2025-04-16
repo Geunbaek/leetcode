@@ -1,14 +1,5 @@
 class Solution:
     def countGood(self, nums: List[int], k: int) -> int:
-        def check(cache):
-            ret = 0
-            for key, val in cache.items():
-                if val <= 1:
-                    continue
-                ret += math.factorial(val - 1)
-            return ret
-
-
         answer = 0
 
         right = -1
