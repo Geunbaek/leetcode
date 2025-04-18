@@ -14,7 +14,7 @@ class Solution:
                 else:
                     stack.pop()
                     stack.append((last_count + 1, c))
-            return "".join(map(lambda x: f"{x[0]}{x[1]}", stack))
+            return "".join(map(lambda x: "".join(map(str, x)), stack))
 
         dp = ["1"]
 
