@@ -5,17 +5,24 @@ class Solution:
         n = len(nums)
 
         cache = {}
-        right = 0
+        left = 0
         answer = 0
 
-        for left in range(n):
-            counter = set()
-            for right in range(left, n):
-                counter.add(nums[right])
+        for right in range(n):
+            now = nums[right]
+            cache[now] = cache.get(now, 0) + 1
 
-                if len(counter) == m:
-                    answer += 1
+            while len(cache) == m:
+                answer += n - right
 
+                first = nums[left]
+                cache[first] = cache.get(first) - 1
+
+                if cache[first] == 0:
+                    del cache[first]
+                
+                left += 1
+       
         return answer
 
             
