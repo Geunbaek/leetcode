@@ -1,42 +1,49 @@
-from sortedcontainers import SortedList
-
-
 class Solution:
-    def maxTaskAssign(
-        self, tasks: List[int], workers: List[int], pills: int, strength: int
-    ) -> int:
-        n, m = len(tasks), len(workers)
-        tasks.sort()
-        workers.sort()
+    def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
+        def check(mid):
+            available_worker = deque()
 
-        def check(mid: int) -> bool:
+            worker_index = 0
             p = pills
-            ws = deque()
-            ptr = m - 1
-            # Enumerate each task from largest to smallest
-            for i in range(mid - 1, -1, -1):
-                while ptr >= m - mid and workers[ptr] + strength >= tasks[i]:
-                    ws.appendleft(workers[ptr])
-                    ptr -= 1
-                if not ws:
+            print()
+            for task_index in range(mid - 1, -1, -1):
+                while worker_index < mid and workers[worker_index] + strength >= tasks[task_index]:
+                    available_worker.append(workers[worker_index])
+                    worker_index += 1
+                if not available_worker:
                     return False
-                # If the largest element in the deque is greater than or equal to tasks[i]
-                elif ws[-1] >= tasks[i]:
-                    ws.pop()
+
+                _max = available_worker[0]
+
+                if _max >= tasks[task_index]:
+                    available_worker.popleft()
                 else:
                     if p == 0:
                         return False
                     p -= 1
-                    ws.popleft()
+                    available_worker.pop()
             return True
 
-        left, right, ans = 1, min(m, n), 0
+        
+        n, m = len(tasks), len(workers)
+        
+        tasks = sorted(tasks)
+        workers = sorted(workers, reverse=True)
+
+        left, right = 1, min(n, m)
+        answer = 0
+        
         while left <= right:
             mid = (left + right) // 2
             if check(mid):
-                ans = mid
+                answer = mid
                 left = mid + 1
             else:
                 right = mid - 1
+        return answer
 
-        return ans
+
+
+        
+        
+                
