@@ -27,7 +27,6 @@ class SnakeGame:
 
         if not (0 <= nx < self.width and 0 <= ny < self.height):
             return -1
-        print((nx, ny), list(self.positions)[:-1])
         if (nx, ny) in list(self.positions)[:-1]:
             return -1
 
