@@ -25,8 +25,8 @@ class Solution:
                         continue
 
                     next_cost = max(moveTime[ny][nx], cost) + step
-                    visited[ny][nx] = 1
                     if dist[ny][nx] > next_cost:
+                        visited[ny][nx] = 1
                         heappush(h, (next_cost, nx, ny, 2 if step == 1 else 1))
 
         return dist[r - 1][c - 1]
