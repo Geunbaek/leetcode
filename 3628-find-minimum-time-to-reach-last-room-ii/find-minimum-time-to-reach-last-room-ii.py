@@ -4,6 +4,7 @@ class Solution:
         h = [(0, 0, 0, 1)]
         inf = float("inf")
         dist = [[inf for _ in range(c)] for _ in range(r)]
+        visited = [[0 for _ in range(c)] for _ in range(r)]
 
         dx = [-1, 0, 1, 0]
         dy = [0, -1, 0, 1]
@@ -20,8 +21,11 @@ class Solution:
                     if not (0 <= nx < c and 0 <= ny < r):
                         continue
 
-                    next_cost = max(moveTime[ny][nx], cost) + step
+                    if visited[ny][nx]:
+                        continue
 
+                    next_cost = max(moveTime[ny][nx], cost) + step
+                    visited[ny][nx] = 1
                     if dist[ny][nx] > next_cost:
                         heappush(h, (next_cost, nx, ny, 2 if step == 1 else 1))
 
