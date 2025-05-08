@@ -4,12 +4,19 @@ class Solution:
         h = [(0, 0, 0, 1)]
         inf = float("inf")
         dist = [[inf for _ in range(c)] for _ in range(r)]
+        visited = [[0 for _ in range(c)] for _ in range(r)]
 
         dx = [-1, 0, 1, 0]
         dy = [0, -1, 0, 1]
 
         while h:
             cost, x, y, step = heappop(h)
+
+            if visited[y][x]:
+                continue
+            
+            visited[y][x] = 1
+
             if dist[y][x] > cost:
                 dist[y][x] = cost
 
