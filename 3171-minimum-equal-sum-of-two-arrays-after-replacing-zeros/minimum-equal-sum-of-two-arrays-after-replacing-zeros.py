@@ -6,8 +6,6 @@ class Solution:
         zero1 = nums1.count(0)
         zero2 = nums2.count(0)
 
-        print(sum1, sum2, zero1, zero2)
-
         if sum1 != sum2:
             if not zero2 and sum1 + zero1 > sum2:
                 return -1
