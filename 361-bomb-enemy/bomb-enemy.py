@@ -36,6 +36,4 @@ class Solution:
 
                     maxKilledEnemies = max(maxKilledEnemies, killedEnemies)
 
-        # for key, val in memo.items():
-        #     print(key, val)
         return maxKilledEnemies
