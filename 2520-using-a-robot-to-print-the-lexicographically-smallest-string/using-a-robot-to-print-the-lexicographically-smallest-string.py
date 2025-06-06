@@ -35,7 +35,5 @@ class Solution:
 
         while stack:
             answer.append(stack.pop())
-        while q:
-            answer.append(q.popleft())
 
         return "".join(answer)
