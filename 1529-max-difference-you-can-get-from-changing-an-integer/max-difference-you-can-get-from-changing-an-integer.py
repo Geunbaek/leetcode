@@ -22,5 +22,4 @@ class Solution:
                 _min = min(_min, new_min_num2)
                 
             _max = max(_max, new_max_num)
-        print(_max, _min)
         return _max - _min
