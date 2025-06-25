@@ -1,5 +1,9 @@
 class Solution:
     def kthSmallestProduct(self, nums1: List[int], nums2: List[int], k: int) -> int:
+
+        if len(nums1) >= len(nums2):
+            nums1, nums2 = nums2, nums1
+
         def calc_less_count(target):
             less_count = 0
 
