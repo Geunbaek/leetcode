@@ -1,16 +1,5 @@
 class Solution:
     def kthSmallestProduct(self, nums1: List[int], nums2: List[int], k: int) -> int:
-        def binary_search(arr, target):
-            l, r = 0, len(arr) - 1
-
-            while l <= r:
-                mid = (l + r) // 2
-                if arr[mid] <= target:
-                    r = mid - 1
-                else:
-                    l = mid + 1
-            return l
-        
         def calc_less_count(target):
             less_count = 0
 
