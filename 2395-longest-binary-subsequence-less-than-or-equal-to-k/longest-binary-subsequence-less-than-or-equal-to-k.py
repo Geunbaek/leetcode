@@ -4,8 +4,6 @@ class Solution:
         cnt = 0
         bits = k.bit_length()
         for i, ch in enumerate(s[::-1]):
-            print(sm)
-            print(cnt)
             if ch == "1":
                 if i < bits and sm + (1 << i) <= k:
                     sm += 1 << i
