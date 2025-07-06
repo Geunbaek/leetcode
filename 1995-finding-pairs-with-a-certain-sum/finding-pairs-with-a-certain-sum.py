@@ -19,7 +19,6 @@ class FindSumPairs:
         for num in self.nums1:
             diff = tot - num
             count += self.cache[diff]
-            print(count)
         return count
 
 
