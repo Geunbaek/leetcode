@@ -2,35 +2,41 @@ use std::cmp;
 
 impl Solution {
     pub fn maximum_length(nums: Vec<i32>) -> i32 {
-        let mut evens: Vec<i32> = vec![];
-        let mut odds: Vec<i32> = vec![];
-        let mut assemble: Vec<i32> = vec![];
+        let mut even = 0;
+        let mut odd = 0;
+        let mut assemble = 0;
+        let mut assemble_last = 0;
 
         for num in &nums {
             if num % 2 == 0 {
-                evens.push(*num);
+                even += 1;
                 
-                if assemble.len() == 0 {
-                    assemble.push(*num);
-                } else {
-                    if assemble[assemble.len() - 1] % 2 != 0 {
-                        assemble.push(*num);
-                    }
+                if assemble == 0 {
+                    assemble += 1;
+                    assemble_last = *num;
+                    continue;
+                } 
+
+                if assemble_last % 2 != 0 {
+                    assemble += 1;
+                    assemble_last = *num;
                 }
+  
             } else {
-                odds.push(*num);
-                if assemble.len() == 0 {
-                    assemble.push(*num);
-                } else {
-                    if assemble[assemble.len() - 1] % 2 == 0 {
-                        assemble.push(*num);
-                    }
+                odd += 1;
+                if assemble == 0 {
+                    assemble += 1;
+                    assemble_last = *num;
+                    continue;
+                } 
+
+                if assemble_last % 2 == 0 {
+                    assemble += 1;
+                    assemble_last = *num;
                 }
             }
         }
 
-        cmp::max(cmp::max(
-            evens.len(), odds.len()
-        ), assemble.len()) as i32
+        cmp::max(cmp::max(even, odd), assemble) 
     }
 }
