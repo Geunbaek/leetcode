@@ -1,29 +1,35 @@
 class Solution:
     def maximumLength(self, nums: List[int]) -> int:
-        evens = []    
-        stack = []
-        odds = []
+        even = 0 
+        stack = 0
+        last = -1
+        odd = 0
 
         for num in nums:
             if num % 2 == 0:
-                evens.append(num)
+                even += 1
 
-                if not stack:
-                    stack.append(num)
+                if stack == 0:
+                    last = num
+                    stack += 1
                     continue
-                if stack[-1] % 2 != 0:
-                    stack.append(num)
-            
+
+                if last % 2 != 0:
+                    last = num
+                    stack += 1
             else:
-                odds.append(num)
+                odd += 1
 
-                if not stack:
-                    stack.append(num)
+                if stack == 0:
+                    last = num
+                    stack += 1
                     continue
-                if stack[-1] % 2 == 0:
-                    stack.append(num)
+
+                if last % 2 == 0:
+                    last = num
+                    stack += 1
 
         return max(
-            len(evens), len(odds), len(stack)
+            even, odd, stack
         )
         
