@@ -18,7 +18,6 @@ class Solution:
 
         for p, sub_s in sub:
             s, point = remove_sub(s, sub_s, p)
-            print(s)
             answer += point
         
         return answer
