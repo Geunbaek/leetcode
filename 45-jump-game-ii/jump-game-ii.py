@@ -1,25 +1,15 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
         n = len(nums)
-        h = [(0, 0)]
-        visited = set()
+        dp = [float("inf") for _ in range(n)]
+        dp[0] = 0
 
-        answer = float('inf')
-        while h:
-            cnt, now = heappop(h)
+        for i in range(n - 1):
+            diff = nums[i]
 
-            if now == n - 1:
-                answer = min(answer, cnt)
-                continue
-
-            for _next in range(now + 1, now + nums[now] + 1):
-                if _next >= n:
+            for j in range(i + 1, i + diff + 1):
+                if j >= n:
                     continue
+                dp[j] = min(dp[j], dp[i] + 1)
 
-                if _next in visited:
-                    continue
-
-                visited.add(_next)
-                heappush(h, (cnt + 1, _next))
-        return answer
-        
+        return dp[n - 1]
