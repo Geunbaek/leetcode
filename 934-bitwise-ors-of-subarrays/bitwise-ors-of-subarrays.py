@@ -3,6 +3,9 @@ class Solution(object):
         ans = set()
         cur = {0}
         for x in A:
-            cur = {x | y for y in cur} | {x}
+            now = set([x])
+            for y in cur:
+                now.add(x | y)
+            cur = now
             ans |= cur
         return len(ans)
