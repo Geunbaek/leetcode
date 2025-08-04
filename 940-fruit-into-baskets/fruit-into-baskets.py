@@ -1,14 +1,5 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        def canHold(basket, fruitType, limit):
-            if len(basket) < limit:
-                return True
-
-            if fruitType in basket:
-                return True
-
-            return False
-
         n = len(fruits)
         basket = {}
 
