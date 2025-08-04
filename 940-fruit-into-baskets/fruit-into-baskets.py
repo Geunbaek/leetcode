@@ -8,17 +8,10 @@ class Solution:
                 return True
             return False
 
-        def getTotal(basket):
-            total = 0
-            for value in basket.values():
-                total += value
-
-            return total
-
-
         n = len(fruits)
         basket = {}
 
+        total = 0
         answer = 0
         right = 0
         for left in range(n):
@@ -26,10 +19,12 @@ class Solution:
                 if fruits[right] not in basket:
                     basket[fruits[right]] = 0
                 basket[fruits[right]] += 1
+                total += 1
                 right += 1
             
-            answer = max(answer, getTotal(basket))
+            answer = max(answer, total)
             basket[fruits[left]] -= 1
+            total -= 1
             if basket[fruits[left]] == 0:
                 del basket[fruits[left]]
 
