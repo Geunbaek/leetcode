@@ -6,6 +6,7 @@ class Solution:
 
             if fruitType in basket:
                 return True
+
             return False
 
         n = len(fruits)
@@ -16,9 +17,7 @@ class Solution:
         right = 0
         for left in range(n):
             while right < n and canHold(basket, fruits[right], 2):
-                if fruits[right] not in basket:
-                    basket[fruits[right]] = 0
-                basket[fruits[right]] += 1
+                basket[fruits[right]] = basket.get(fruits[right], 0) + 1
                 total += 1
                 right += 1
             
