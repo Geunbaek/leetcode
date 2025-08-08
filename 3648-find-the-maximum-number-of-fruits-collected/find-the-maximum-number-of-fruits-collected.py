@@ -53,9 +53,7 @@ class Solution:
             dp[i][i] = dp[i - 1][i - 1] + fruits[i][i]
 
         get_max_fruits()
-        
-        for l in dp:
-            print(l)
+
         return dp[n - 1][n - 1] + dp[n - 1][n - 2] + dp[n - 2][n - 1]
 
        
