@@ -3,7 +3,6 @@
  * @return {Promise}
  */
 async function sleep(millis) {
-    const start = Date.now();
     return new Promise((resolve) => setTimeout(resolve, millis))
 }
 
