@@ -6,8 +6,7 @@
 var timeLimit = function(fn, t) {
     return async function(...arg) {
         const cancel = new Promise((_, reject) => setTimeout(() => reject("Time Limit Exceeded"), t));
-
-        return (await Promise.race([fn(...arg), cancel]))
+        return await Promise.race([fn(...arg), cancel])
     }
 };
 
