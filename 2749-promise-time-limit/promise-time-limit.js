@@ -6,10 +6,8 @@
 var timeLimit = function(fn, t) {
     return async function(...arg) {
         const cancel = new Promise((_, reject) => setTimeout(() => reject("Time Limit Exceeded"), t));
-        const oper = new Promise((resolve) => setTimeout(() => {
-            resolve(fn(...arg))
-        }, arg))
-        return (await Promise.race([oper, cancel]))
+
+        return (await Promise.race([fn(...arg), cancel]))
     }
 };
 
