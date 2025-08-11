@@ -4,10 +4,10 @@
  */
 var curry = function(fn) {
     return function curried(...args) {
-        if (args.length >= fn.length) {
-            return fn(...args)
+        if (args.length < fn.length) {
+            return curried.bind(this, ...args)
         }
-        return (...nextArgs) => curried(...args, ...nextArgs);
+        return fn(...args)
     }
 };
 
