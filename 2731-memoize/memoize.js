@@ -5,7 +5,7 @@
 function memoize(fn) {
     const cache = new Map();
     return function(...args) {
-        const stringArgs = args.toString()
+        const stringArgs = args.join(",")
         if (cache.has(stringArgs)){
             return cache.get(stringArgs)
         }
