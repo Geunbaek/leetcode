@@ -4,10 +4,7 @@
  */
 async function sleep(millis) {
     const start = Date.now();
-    return new Promise((res) => {
-        while (Date.now() - start < millis) {}
-        res();
-    })
+    return new Promise((resolve) => setTimeout(() => resolve(), millis))
 }
 
 /** 
