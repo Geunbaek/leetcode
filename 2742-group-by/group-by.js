@@ -5,7 +5,7 @@
 Array.prototype.groupBy = function(fn) {
     return this.reduce((acc, cur) => {
         const key = fn(cur);
-        if (key in acc) {
+        if (Reflect.has(acc, key)) {
             acc[key].push(cur)
             return acc;
         } else {
