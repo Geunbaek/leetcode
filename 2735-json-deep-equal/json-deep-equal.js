@@ -16,8 +16,8 @@ var areDeeplyEqual = function(o1, o2) {
         typeof o1 === "undefined"
     ) return o1 === o2;
 
-    const keys1 = Object.keys(o1);
-    const keys2 = Object.keys(o2);
+    const keys1 = Reflect.ownKeys(o1);
+    const keys2 = Reflect.ownKeys(o2);
 
     if (keys1.length !== keys2.length) return false;
 
