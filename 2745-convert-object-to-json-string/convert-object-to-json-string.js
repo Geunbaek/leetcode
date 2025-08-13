@@ -5,17 +5,25 @@
 var jsonStringify = function(object) {
     if (typeof object === 'string') return `"${object}"`
     if (typeof object !== "object" || object === null) return `${object}`;
+
+
+    if (Array.isArray(object)) {
+        const values = object.map(value => {
+            if (typeof value === "string") return `"${value}"`
+            if (typeof value !== "object" || value === null) return `${value}`;
+            return jsonStringify(value)
+        })
+        return `[${values.join(",")}]`
+    }
+
     const keys = Reflect.ownKeys(object);
 
     const values = keys.map(key => {
         const value = object[key];
-        if (Array.isArray(object) && key == "length") return null
-        if (typeof value === "string") return Array.isArray(object) ? `"${value}"` : `"${key}":"${value}"`;
-        if (typeof value !== "object" || value === null) return Array.isArray(object) ? `${value}` : `"${key}":${value}`;
-        const child = jsonStringify(object[key])
-        return Array.isArray(object)? jsonStringify(object[key]) : `"${key}":${child}`;
-    }).filter(value => value)
+        if (typeof value === "string") return `"${key}":"${value}"`;
+        if (typeof value !== "object" || value === null) return `"${key}":${value}`;
+        return `"${key}":${jsonStringify(object[key])}`;
+    })
 
-    if (Array.isArray(object)) return `[${values.join(",")}]`
     return `{${values.join(",")}}`
 };
