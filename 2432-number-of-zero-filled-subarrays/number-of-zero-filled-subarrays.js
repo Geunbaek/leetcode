@@ -7,35 +7,19 @@ const sigma = (n) => ((n + 1) * n) / 2
  * @return {number}
  */
 var zeroFilledSubarray = function(nums) {
-    const stack = []
-    let zeros = 0
+    let answer = 0;
+    let zeros = 0;
 
-    for (let num of nums) {
-        if (num === 0) {
-            stack.push(num);
+    const {length} = nums; 
+    for (let i = 0; i < length; i ++) {
+        if (nums[i] === 0) {
+            zeros += 1;
         } else {
-            let zero = 0;
-            while (stack.length !== 0 && stack[stack.length - 1] === 0) {
-                stack.pop();
-                zero += 1;
-            }
-
-            if (zero) {
-                zeros += sigma(zero)
-            }
+            answer += sigma(zeros)
+            zeros = 0;
         }
     }
-
-    let zero = 0;
-    while (stack.length !== 0 && stack[stack.length - 1] === 0) {
-        stack.pop();
-        zero += 1;
-    }
-
-    if (zero) {
-        zeros += sigma(zero)
-    }
-
-    return zeros    
+    answer += sigma(zeros)
+    return answer
 };
 
