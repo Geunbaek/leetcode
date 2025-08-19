@@ -8,7 +8,7 @@ const sigma = (n) => ((n + 1) * n) / 2
  */
 var zeroFilledSubarray = function(nums) {
     const stack = []
-    const zeros = []
+    let zeros = 0
 
     for (let num of nums) {
         if (num === 0) {
@@ -21,7 +21,7 @@ var zeroFilledSubarray = function(nums) {
             }
 
             if (zero) {
-                zeros.push(zero);
+                zeros += sigma(zero)
             }
         }
     }
@@ -33,8 +33,9 @@ var zeroFilledSubarray = function(nums) {
     }
 
     if (zero) {
-        zeros.push(zero);
+        zeros += sigma(zero)
     }
-    return zeros.reduce((acc, zero) => acc + sigma(zero), 0);    
+
+    return zeros    
 };
 
