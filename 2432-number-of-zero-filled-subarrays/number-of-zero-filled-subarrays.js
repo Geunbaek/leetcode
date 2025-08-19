@@ -15,11 +15,11 @@ var zeroFilledSubarray = function(nums) {
         if (nums[i] === 0) {
             zeros += 1;
         } else {
-            answer += sigma(zeros)
+            answer += ((zeros + 1) * zeros) / 2
             zeros = 0;
         }
     }
-    answer += sigma(zeros)
+    answer += ((zeros + 1) * zeros) / 2
     return answer
 };
 
