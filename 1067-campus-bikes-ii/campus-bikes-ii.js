@@ -4,44 +4,65 @@
  * @return {number}
  */
 var assignBikes = function(workers, bikes) {
-    function calcDist(worker, bike) {
-        const [wx, wy] = worker;
-        const [bx, by] = bike;
-        return Math.abs(bx - wx) + Math.abs(by - wy)
-    }
+    const X = 0, Y = 1;
+    const get = (mask, i) => (1 << i) & mask;
+    const set = (mask, i) => (1 << i)|mask;
+    const unset = (mask, i) => (1 << i)^mask; // unsets if set. if is not set will set it
 
-    function calcTotalDists(){
-        return workersVisit.reduce((acc, bikeIndex, workerIndex)=>{
-            const bike = bikes[bikeIndex];
-            const worker = workers[workerIndex];
-            return acc + calcDist(worker, bike);
-        }, 0)
-    }
+    const getDistance = (pos1, pos2) => {
+        return Math.abs(pos1[X]-pos2[X]) + Math.abs(pos1[Y]-pos2[Y]);
+    };
 
-    function backtracking(depth){
-        if (depth >= n) {
-            answer = Math.min(answer, calcTotalDists());
-            return;
-        }
+    const memo = {};
+    const dp = (workerI, bikeMask) => {
+        if (workerI < 0) return 0;
+        const key = `${workerI}.${bikeMask}`;
+        if (key in memo) return memo[key];
 
-        for (let i = 0; i < m; i++) {
-            if (bikesVisit[i]) {
-                continue
+        let min = Infinity;
+        for (let i=0;i<bikes.length;i++) {
+            if (get(bikeMask, i) === 0) {
+                const currDistance = getDistance(
+                    workers[workerI],
+                    bikes[i]
+                );
+                min = Math.min(
+                    min, 
+                    currDistance + dp(workerI-1, set(bikeMask, i))
+                );
             }
-            workersVisit[depth] = i;
-            bikesVisit[i] = true;
-            backtracking(depth + 1)
-            workersVisit[depth] = -1;
-            bikesVisit[i] = false;
         }
-    }
 
-    const n = workers.length;
-    const m = bikes.length;
+        memo[key] = min;
+        return memo[key];
+    };
+    
+    const result = dp(workers.length-1, 0);
 
-    const workersVisit = new Array(n).fill(-1);
-    const bikesVisit = new Array(n).fill(false);
-    let answer = Infinity;
-    backtracking(0);
-    return answer
+    return result;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
