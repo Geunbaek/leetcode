@@ -26,7 +26,7 @@ const minimumSum2 = (grid, u, d, l, r) => {
 const rotate = (vec) => {
     const n = vec.length,
         m = vec[0].length;
-    const ret = new Array(m).fill().map(() => new Array(n));
+    const ret = Array.from({length: m}, () => new Array(n));
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
             ret[m - j - 1][i] = vec[i][j];
