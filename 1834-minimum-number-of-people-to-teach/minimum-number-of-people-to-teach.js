@@ -12,7 +12,8 @@ const hasEqualEl = (arr1, arr2) => {
 var minimumTeachings = function(n, languages, friendships) {
     const needConnectedSet = friendships.reduce((acc, [u, v]) => {
         if (!hasEqualEl(languages[u - 1], languages[v - 1])) {
-            return acc.union(new Set([u, v]));
+            acc.add(u);
+            acc.add(v);
         }
         return acc;
     }, new Set());
