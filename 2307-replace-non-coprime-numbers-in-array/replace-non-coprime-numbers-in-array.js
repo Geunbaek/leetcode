@@ -17,7 +17,7 @@ var replaceNonCoprimes = function(nums) {
 
     for (const num of nums) {
         let n = num;
-        while (stack.length !== 0 && !isCoprimes(stack.at(-1), n)) {
+        while (stack.length !== 0 && !isCoprimes(stack[stack.length - 1], n)) {
             n = lcm(stack.pop(), n);
         }
 
