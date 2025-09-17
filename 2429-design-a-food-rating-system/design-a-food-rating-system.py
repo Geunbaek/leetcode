@@ -29,6 +29,7 @@ class FoodRatings:
 
             if self.renewal[cuisine][food] != -rating:
                 continue
+                
             heappush(self.cache[cuisine], (rating, food))
             return food    
 
