@@ -57,30 +57,30 @@ Router.prototype.forwardPacket = function() {
 };
 
 const leftBinarySearch = (routes, startTime) => {
-    let [left, right] = [0, routes.length];
+    let [left, right] = [0, routes.length - 1];
 
-    while (left < right) {
+    while (left <= right) {
         const mid = Math.floor((left + right) / 2);
 
         if (routes[mid][2] < startTime) {
             left = mid + 1;
         } else {
-            right = mid
+            right = mid - 1
         }
     }
     return left;
 }
 
 const rightBinarySearch = (routes, endTime) => {
-    let [left, right] = [0, routes.length];
+    let [left, right] = [0, routes.length - 1];
 
-    while (left < right) {
+    while (left <= right) {
         const mid = Math.floor((left + right) / 2);
 
         if (routes[mid][2] <= endTime) {
             left = mid + 1;
         } else {
-            right = mid;
+            right = mid - 1;
         }
     }
     return left;
