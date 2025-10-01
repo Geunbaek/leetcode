@@ -8,12 +8,9 @@ var numWaterBottles = function(numBottles, numExchange) {
     let answer = 0;
     
     while (true) {
-        // use
         empty += numBottles;
         answer += numBottles;
         numBottles = 0;
-        
-        // answer
 
         const buy = Math.floor(empty / numExchange);
         numBottles += buy;
