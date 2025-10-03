@@ -1,30 +1,30 @@
 class Solution:
     def trapRainWater(self, heightMap: List[List[int]]) -> int:
         r, c = len(heightMap), len(heightMap[0])
+
+        h = []
+        water = 0
+
         dx = [-1, 0, 1, 0]
         dy = [0, -1, 0, 1]
 
-        h = []  
-        visited = [[0 for _ in range(c)] for _ in range(r)]
+        visited = set()
 
         for x in range(c):
-            heappush(h, (heightMap[0][x], x, 0))
-            visited[0][x] = 1
+            heappush(h, (heightMap[0][x], 0, x))
+            heappush(h, (heightMap[r - 1][x], r - 1, x))
+            visited.add((x, 0))
+            visited.add((x, r - 1))
 
-            heappush(h, (heightMap[r - 1][x], x, r - 1))
-            visited[r - 1][x] = 1
+        for y in range(r):
+            heappush(h, (heightMap[y][0], y, 0))
+            heappush(h, (heightMap[y][c - 1], y, c - 1))
+            visited.add((0, y))
+            visited.add((c - 1, y))
 
-        for y in range(1, r - 1):
-            heappush(h, (heightMap[y][0], 0, y))
-            visited[y][0] = 1
-
-            heappush(h, (heightMap[y][c - 1], c - 1, y))
-            visited[y][c - 1] = 1
-
-        water = 0
         while h:
-            now, x, y = heappop(h)
-            _min = now
+            height, y, x = heappop(h)
+
             for i in range(4):
                 nx = x + dx[i]
                 ny = y + dy[i]
@@ -32,14 +32,15 @@ class Solution:
                 if not (0 <= nx < c and 0 <= ny < r):
                     continue
 
-                if visited[ny][nx] == 1:
+                if (nx, ny) in visited:
                     continue
 
+                next_height = heightMap[ny][nx]
 
-                if heightMap[ny][nx] < _min:
-                    water += _min - heightMap[ny][nx] 
+                if next_height < height:
+                    water += height - next_height
 
-                visited[ny][nx] = 1
-                heappush(h, (max(heightMap[ny][nx], _min), nx, ny))
+                visited.add((nx, ny))
+                heappush(h, (max(next_height, height), ny, nx))
 
         return water
