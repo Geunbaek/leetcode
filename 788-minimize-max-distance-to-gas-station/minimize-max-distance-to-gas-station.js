@@ -4,16 +4,11 @@
  * @return {number}
  */
 var minmaxGasDist = function(stations, k) {
-    const canBuildK = (minDist) => {
-        let count = 0;
-        for (let i = 0; i < stations.length - 1; i ++) {
-            const now = stations[i];
-            const next = stations[i + 1];
-            const dist = next - now;
-            count += Math.floor(dist / minDist);
-        }
-        return count <= k;
-    }
+    const canBuildK = (minDist) => stations
+        .reduce((count, station, i) => {
+            if (i === stations.length - 1) return count;
+            return count + Math.floor((stations[i + 1] - station) / minDist);
+        }, 0) <= k
 
     let [left, right] = [0, 100_000_001];
     let answer = Infinity;
