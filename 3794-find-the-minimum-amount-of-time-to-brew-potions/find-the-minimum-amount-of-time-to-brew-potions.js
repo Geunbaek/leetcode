@@ -4,30 +4,23 @@
  * @return {number}
  */
 var minTime = function(skill, mana) {
-    const [r, c] = [mana.length, skill.length];
+    const n = skill.length, m = mana.length;
+    let pref = new Array(n).fill(0);
 
-    const dp = Array.from({length: r}, () => new Array(c + 1).fill(0));
-    const prefix = [0];
-
-    for (let x = 0; x < c; x++) {
-        prefix.push(prefix[prefix.length - 1] + skill[x]);
-        dp[0][x + 1] = prefix.at(-1) * mana[0]
-    }   
-    for (let y = 1; y < r; y++) {
-        let max = 0;
-        const scale = mana[y];
-        for (let x = 1; x <= c; x++) {
-            const prev = dp[y - 1][x]
-            const sum = (prefix[x - 1]) * scale;
-            max = Math.max(max, prev - sum)
-        }
-
-        dp[y][0] = max;
-        for (let x = 1; x <= c; x++) { 
-            dp[y][x] = dp[y][x - 1] + (skill[x - 1] * scale)
-        }
-
+    for (let i=1; i<n; i++) {
+        pref[i] = pref[i - 1] + skill[i];
     }
 
-    return dp[r - 1][c]
+    let tSum = skill[0] * mana[0];
+   
+    for (let j = 1; j < m; j++) {
+        let tMax = skill[0] * mana[j];
+        for (let i = 1; i < n; i++) {
+            let tDiff = pref[i] * mana[j - 1] - pref[i - 1] * mana[j];
+            if (tDiff > tMax) 
+                tMax = tDiff;
+        }
+        tSum += tMax;
+    }
+    return tSum + pref[n - 1] * mana[m - 1];
 };
