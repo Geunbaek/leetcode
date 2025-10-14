@@ -19,7 +19,6 @@ var hasIncreasingSubarrays = function(nums, k) {
     const increasedRangeEndSet = new Set();
 
     for (let i = 0; i < nums.length; i++) {
-        console.log(increasedRangeEndSet)
         const range = nums.slice(i, i + k)
         if (range.length < k) break; 
 
