@@ -12,7 +12,6 @@
  */
 var modifiedList = function(nums, head) {
     const numSet = new Set(nums);
-    console.log({nums, head})
     let node = head;
     let prev = new ListNode(0, head);
     let ret = prev;
