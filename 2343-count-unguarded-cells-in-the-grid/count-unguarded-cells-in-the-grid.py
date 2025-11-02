@@ -2,36 +2,46 @@ class Solution:
     def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
         r, c = m, n
 
-        board = [[-1 for _ in range(c)] for _ in range(r)]
+        board = [[0 for _ in range(c)] for _ in range(r)]
         count = r * c
         count -= len(walls)
         for y, x in walls:
-            board[y][x] = 'W'
-
-        q = deque()
-
-        dx = [-1, 0, 1, 0]
-        dy = [0, -1, 0, 1]
-    
-        visited = set()
+            board[y][x] = 1
+        
         count -= len(guards)
         for y, x in guards:
-            board[y][x] = 'G'
-            for i in range(4):
-                q.append((x, y, i))
+            board[y][x] = 2
 
-        while q:
-            x, y, d = q.popleft()
-            nx = x + dx[d]
-            ny = y + dy[d]
-            if not (0 <= nx < c and 0 <= ny < r):
-                continue
-            if (board[ny][nx] == 'W' or board[ny][nx] == 'G' or board[ny][nx] == d):
-                continue
-            visited.add((nx, ny))
-            q.append((nx, ny, d))
-            board[ny][nx] = d
+        guarded = set()
+        def mark(x, y):
+            for nx in range(x + 1, c):
+                if board[y][nx] in [1, 2]:
+                    break
+                board[y][nx] = 3
+                guarded.add((nx, y))
 
-        count -= len(visited)
+            for nx in range(x - 1, -1, -1):
+                if board[y][nx] in [1, 2]:
+                    break
+                board[y][nx] = 3
+                guarded.add((nx, y))
+
+
+            for ny in range(y + 1, r):
+                if board[ny][x] in [1, 2]:
+                    break
+                board[ny][x] = 3
+                guarded.add((x, ny))
+
+
+            for ny in range(y - 1, -1, -1):
+                if board[ny][x] in [1, 2]:
+                    break
+                board[ny][x] = 3
+                guarded.add((x, ny))
+
+        for y, x in guards:
+            mark(x, y)
+
+        count -= len(guarded)
         return count
-
