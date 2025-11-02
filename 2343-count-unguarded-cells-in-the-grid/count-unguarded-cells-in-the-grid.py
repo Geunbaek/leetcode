@@ -3,12 +3,12 @@ class Solution:
         r, c = m, n
 
         board = [[0 for _ in range(c)] for _ in range(r)]
-        count = r * c
-        count -= len(walls)
+        count = 0
+        # count -= len(walls)
         for y, x in walls:
             board[y][x] = 1
         
-        count -= len(guards)
+        # count -= len(guards)
         for y, x in guards:
             board[y][x] = 2
 
@@ -26,7 +26,6 @@ class Solution:
                 board[y][nx] = 3
                 guarded.add((nx, y))
 
-
             for ny in range(y + 1, r):
                 if board[ny][x] in [1, 2]:
                     break
@@ -43,5 +42,10 @@ class Solution:
         for y, x in guards:
             mark(x, y)
 
-        count -= len(guarded)
+        # count -= len(guarded)
+
+        for y in range(r):
+            for x in range(c):
+                if board[y][x] == 0:
+                    count += 1
         return count
