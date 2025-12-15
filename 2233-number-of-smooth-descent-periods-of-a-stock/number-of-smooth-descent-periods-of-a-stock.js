@@ -9,6 +9,5 @@ var getDescentPeriods = function(prices) {
     for (let i = 1; i < n; i++) {
         if (prices[i] - prices[i - 1] === -1) dp[i] += dp[i - 1];
     }
-    console.log(dp)
     return dp.reduce((acc, cur) => acc + cur, 0);
 };
