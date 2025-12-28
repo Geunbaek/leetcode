@@ -1,27 +1,48 @@
 class Solution:
     def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
-        cache = [0 for _ in range(n)]
-        meetings.sort()
-        used_h = []
-        unused_h = []
+        
+        h = []
+        
+        meetings.sort(key = lambda x: (x[0], -x[-1]))
+                
+        now_room_id = 0
+        for s, e in meetings:
+            if not h:
+                heapq.heappush(h, (e, now_room_id, 1))
+                now_room_id += 1
+                continue
 
-        for i in range(n):
-            heappush(unused_h, (i))
-
-        for start, end in meetings:
-            while used_h and used_h[0][0] <= start:
-                end_time, room_no = heappop(used_h)
-                heappush(unused_h, room_no)
-
-            if unused_h:
-                room_no = heappop(unused_h)
-                cache[room_no] += 1
-                heappush(used_h, (end, room_no))
+            end, room_id, cnt = heapq.heappop(h)
+            if end <= s:
+                min_room_id = room_id
+                temp = [(end, room_id, cnt)]
+                while h:
+                    end, room_id, cnt = heapq.heappop(h)
+                    if end <= s:
+                        min_room_id = min(min_room_id, room_id)
+                    temp.append((end, room_id, cnt))
+                for end, room_id, cnt in temp:
+                    if min_room_id == room_id:
+                        heapq.heappush(h, (e, room_id, cnt + 1))
+                    else:
+                        heapq.heappush(h, (end, room_id, cnt))
             else:
-                end_time, room_no = heappop(used_h)
-                cache[room_no] += 1
-                heappush(used_h, (end + (end_time - start), room_no))
-
-        return cache.index(max(cache))
+                if now_room_id == n:
+                    duration = e - s
+                    heapq.heappush(h, (end + duration, room_id, cnt + 1))
+                else:
+                    heapq.heappush(h, (end, room_id, cnt))
+                    heapq.heappush(h, (e, now_room_id, 1))
+                    now_room_id += 1
+        print(h)
+        max_count = 0
+        answer = n
+        while h:
+            e, r, c = heapq.heappop(h)
+            if max_count < c:
+                max_count = c
+                answer = r
+            elif max_count == c:
+                answer = min(answer, r)
         
-        
+        return answer 
