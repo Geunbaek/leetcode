@@ -17,12 +17,21 @@ const getDivisors = (num) => {
  * @return {number}
  */
 var sumFourDivisors = function(nums) {
+    const cache = new Map();
     let answer = 0;
     for (const num of nums)
     {
+        if (cache.has(num))
+        {
+            const {count, sum} = cache.get(num);
+            if (count === 4) answer += sum;
+            continue;
+        }
         const divisors = getDivisors(num);
         if (divisors.size === 4) {
-            answer += [...divisors].reduce((acc, cur) => acc + cur, 0);
+            const sum = [...divisors].reduce((acc, cur) => acc + cur, 0);
+            answer += sum;
+            cache.set({count: divisors.size, sum});
         }
     }
     return answer;
