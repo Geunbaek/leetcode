@@ -4,7 +4,7 @@ class Solution:
         minus_sum = 0
         minus_count = 0
         r,c = len(matrix), len(matrix[0])
-        abs_min = float('inf')
+        abs_min = 100_000
         for y in range(r):
             for x in range(c):
                 if matrix[y][x] >= 0:
