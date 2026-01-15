@@ -13,7 +13,7 @@ class Solution:
                 width = max(width, _max)
                 _max = 1
         width = max(width, _max)
-        
+
         _max = 1 if vBars else 0
         for v1, v2 in zip(vBars, vBars[1:]):
             if v2 - v1 == 1:
@@ -22,5 +22,4 @@ class Solution:
                 height = max(height, _max)
                 _max = 1
         height = max(height, _max)
-        print(height, width)
         return (min(height, width) + 1) ** 2
