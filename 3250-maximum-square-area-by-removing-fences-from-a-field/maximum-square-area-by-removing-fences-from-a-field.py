@@ -14,7 +14,7 @@ class Solution:
         for i in range(len(h)):
             for j in range(i + 1, len(h)):
                 if h[j] - h[i] in vMemo:
-                    _max = max(_max, (h[j] - h[i]) ** 2)
+                    _max = max(_max, pow(h[j] - h[i], 2))
         if _max == -1:
             return _max
         return _max % MOD
