@@ -5,9 +5,8 @@ class Solution:
         ans = [-1 for _ in range(n)]
 
         for i in range(n):
-            num = nums[i]
-            for j in range(1, num):
-                if j | j + 1 == num:
-                    ans[i] = j
-                    break
+            if not nums[i] % 2:
+                continue
+
+            ans[i] = nums[i] - ((nums[i] + 1) & (-nums[i] - 1)) // 2
         return ans
