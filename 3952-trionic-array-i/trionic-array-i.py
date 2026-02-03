@@ -16,7 +16,6 @@ class Solution:
 
         if p - 0 < 1 or n - q <= 1 or p >= q:
             return False
-        print(p, q)
         for i in range(p, q):
             if nums[i] <= nums[i + 1]:
                 return False
