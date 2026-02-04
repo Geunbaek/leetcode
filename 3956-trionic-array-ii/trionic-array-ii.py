@@ -49,9 +49,6 @@ class Solution:
                 continue
             
             _sum = left_max + mid_sum + right_max
-            print(left_max, mid_sum, right_max)
-            print(l, p, q, r)
-            print(_sum)
             ans = max(ans, _sum)
             i = q
 
