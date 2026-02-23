@@ -4,4 +4,4 @@ class Solution:
         n = len(s)
         for i in range(n - k + 1):
             nums.add(s[i: i + k])
-        return len(nums) == 2 ** k
+        return len(nums) == pow(2, k)
