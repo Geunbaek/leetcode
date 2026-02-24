@@ -8,11 +8,11 @@ class Solution:
     def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
         def recur(node, path):
             if not node.left and not node.right:
-                return int(path + str(node.val), 2)
+                return (path << 1) | node.val
             _sum = 0
             if node.left:
-                _sum += recur(node.left, path + str(node.val))
+                _sum += recur(node.left, (path << 1) | node.val)
             if node.right:
-                _sum += recur(node.right, path + str(node.val))
+                _sum += recur(node.right, (path << 1) | node.val)
             return _sum
-        return recur(root, "")
+        return recur(root, 0)
