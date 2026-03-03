@@ -17,7 +17,7 @@ class Solution:
         
         start = '0'
 
-        for _ in range(n):
+        for _ in range(n - 1):
             start = _next(start)
 
         return start[k - 1]
