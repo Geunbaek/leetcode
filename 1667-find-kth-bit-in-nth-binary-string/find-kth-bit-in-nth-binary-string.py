@@ -1,7 +1,9 @@
 class Solution:
     def findKthBit(self, n: int, k: int) -> str:
         def invert(b):
-            return b.replace("0", "2").replace("1", "0").replace("2", "1")
+            pattern = r"0|1"
+            replacements = {"0": "1", "1": "0"}
+            return re.sub(pattern, lambda m: replacements[m.group(0)], b)
         
         def rev(b):
             return b[::-1]
