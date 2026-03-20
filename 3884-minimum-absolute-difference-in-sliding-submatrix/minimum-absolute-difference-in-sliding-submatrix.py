@@ -19,7 +19,6 @@ class Solution:
         for y in range(r - k + 1):
             ans.append([])
             for x in range(c - k + 1):
-                print(x, y)
                 ans[-1].append(get_min_diff(x, y))
         return ans
 
