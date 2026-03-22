@@ -15,7 +15,7 @@ class Solution:
         
         def rotate_90deg(mat):
             r, c = len(mat), len(mat[0])
-            ret = [[0 for _ in range(c)] for _ in range(r)]
+            ret = [[0 for y in range(c)] for x in range(r)]
 
             for y in range(r):
                 for x in range(c):
