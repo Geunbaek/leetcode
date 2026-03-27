@@ -2,7 +2,7 @@ class Solution:
     def areSimilar(self, mat: List[List[int]], k: int) -> bool:
         r, c = len(mat), len(mat[0])
         temp = [row[::] for row in mat]
-
+        k %= c
         def shift_left(y):
             first = temp[y][0]
             for x in range(c - 1):
