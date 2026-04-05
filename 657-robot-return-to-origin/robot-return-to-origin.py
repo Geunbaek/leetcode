@@ -1,14 +1,12 @@
 class Solution:
     def judgeCircle(self, moves: str) -> bool:
         x, y = 0, 0
-
+        movements = {
+            "U": lambda x, y: (x, y - 1),
+            "D": lambda x, y: (x, y + 1),
+            "L": lambda x, y: (x - 1, y),
+            "R": lambda x, y: (x + 1, y),
+        }
         for move in moves:
-            if move == "U":
-                y -= 1
-            elif move == "D":
-                y += 1
-            elif move == "L":
-                x -= 1
-            elif move == "R":
-                x += 1
+            x, y = movements[move](x, y)
         return x == 0 and y == 0
