@@ -6,7 +6,6 @@ class Solution:
             cache[num].append(i)
 
         def calc_tuple_dist(i, j, k):
-            print(i, j, k)
             return abs(i - j) + abs(j - k) + abs(k - i)
 
         answer = -1
@@ -15,7 +14,6 @@ class Solution:
                 continue
             for i in range(len(ns) - 2):
                 tuple_dist = calc_tuple_dist(ns[i], ns[i + 1], ns[i + 2])
-                print(tuple_dist)
                 if answer == -1:
                     answer = tuple_dist
                 else:
