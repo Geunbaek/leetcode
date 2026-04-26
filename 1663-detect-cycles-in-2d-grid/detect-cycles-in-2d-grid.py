@@ -30,6 +30,5 @@ class Solution:
                 if visited[y][x]:
                     continue
                 if dfs(x, y, -1, -1, 1, grid[y][x]):
-                    print(x, y)
                     return True
         return False
