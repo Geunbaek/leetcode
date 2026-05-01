@@ -4,7 +4,6 @@ class Solution:
         _sum = sum(nums)
 
         now = sum([i * num for i, num in enumerate(nums)])
-        print(now)
         ans = now
 
         for i in range(n - 1, 0, -1):
