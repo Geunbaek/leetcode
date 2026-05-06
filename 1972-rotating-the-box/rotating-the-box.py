@@ -10,7 +10,6 @@ class Solution:
         nr, nc = len(ret), len(ret[0])
         for y in range(nr - 1, -1, -1):
             for x in range(nc):
-                print(y, x)
                 if ret[y][x] == '.':
                     for k in range(y - 1, -1, -1):
                         if ret[k][x] == '*':
