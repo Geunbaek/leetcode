@@ -35,7 +35,7 @@ class Solution:
                 break
             count = k % calc_circum(sx)
             for repeat in range(count):
-                rotate(sx, sy, repeat == count - 1, 1)
+                rotate(sx, sy, repeat == count - 1, count)
             if count == 0:
-                rotate(sx, sy, 1, 0)
+                rotate(sx, sy, 1, count)
         return grid
