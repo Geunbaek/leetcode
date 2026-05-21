@@ -12,6 +12,7 @@ class Solution:
             while num >= 10:
                 if num in num1_set:
                     answer = max(answer, len(str(num)))
+                    break
                 num //= 10
             if num in num1_set:
                 answer = max(answer, len(str(num)))
