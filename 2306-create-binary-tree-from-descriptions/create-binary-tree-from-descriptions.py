@@ -32,11 +32,8 @@ class Solution:
                 cache[parent].right = cache[child]
             
             union(child, parent)
-        root = None
+        root = find(descriptions[0][0])
 
-        for key in p.keys():
-            root = find(key)
-        
         return cache[root]
 
 
