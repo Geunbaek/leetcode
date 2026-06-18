@@ -5,8 +5,6 @@ class Solution:
 
         def get_minute_angle(m):
             return (m * (360 / 60))
-        print(360 - get_hour_angle(hour % 12, minutes))
-        print(get_minute_angle(minutes))
         return min(
             abs(get_hour_angle(hour % 12, minutes) - get_minute_angle(minutes)),
             360 - get_minute_angle(minutes) + get_hour_angle(hour % 12, minutes),
