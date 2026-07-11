@@ -9,43 +9,22 @@ class Solution:
             ap = find(a)
             bp = find(b)
             p[ap] = bp
-            
-        def check(parent):
-            q = deque([parent])
-            visited = set([parent])
-            
-            while q:
-                now = q.popleft()
 
-                if len(graph[now]) != cache[parent] - 1:
-                    return False
-
-                for _next in graph[now]:
-                    if _next in visited:
-                        continue
-                    
-                    visited.add(_next)
-                    q.append(_next)
-
-            return True
-
-
+        mst = [[] for _ in range(n)]
         p = [i for i in range(n)]
-        graph = [[] for _ in range(n)]
         for u, v in edges:
             union(u, v)
-            graph[u].append(v)
-            graph[v].append(u)
-        
-        cache = defaultdict(int)
+            mst[u].append(v)
 
+        roots_nodes = defaultdict(int)
+        roots_edges = defaultdict(int)
         for i in range(n):
-            cache[find(i)] += 1
-
+            root = find(i)
+            roots_nodes[root] += 1
+            roots_edges[root] += len(mst[i])
+        print(roots_nodes, roots_edges)
         answer = 0
-        for key, value in cache.items():
-            if check(key):
+        for root, nodes in roots_nodes.items():
+            if nodes * (nodes - 1) / 2 == roots_edges[root]:
                 answer += 1
         return answer
-
-    
