@@ -1,12 +1,17 @@
 class Solution:
     def sequentialDigits(self, low: int, high: int) -> List[int]:
-        nums = [i for i in range(1, 10)]
-        answer = []
-        for k in range(1, 10):
-            for i in range(10):
-                if i + k >= 10:
-                    continue
-                num = int("".join(map(str, nums[i: i + k])))
-                if low <= num <= high:
-                    answer.append(num)
-        return answer
+        arr = [str(i) for i in range(1, 10)]
+        digits = []
+        
+        for i in range(len(arr)):
+            for j in range(i + 1, len(arr)):
+                digit = "".join(arr[i: j + 1])
+                digits.append(int(digit))
+                
+        ans = []
+        
+        for digit in digits:
+            if low <= digit <= high:
+                ans.append(digit)
+        return sorted(ans)
+                
