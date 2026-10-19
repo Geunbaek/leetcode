@@ -1,10 +1,3 @@
 class Solution:
     def targetIndices(self, nums: list[int], target: int) -> list[int]:
-        nums.sort()
-
-        answer = []
-
-        for i in range(len(nums)):
-            if nums[i] == target:
-                answer.append(i)
-        return answer
+        return list(map(lambda x: x[0], filter(lambda x: x[1] == target, enumerate(sorted(nums)))))
